@@ -1,4 +1,5 @@
 name: Build and Analyze
+
 on:
   push:
     branches:
@@ -6,21 +7,24 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
-    name: SonarCloud
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.organization=erickjhairgonzalezgiron0-coder
             -Dsonar.projectKey=erickjhairgonzalezgiron0-coder_miscelanea-pos-java
             -Dsonar.sources=.
+            -Dsonar.java.binaries=.
