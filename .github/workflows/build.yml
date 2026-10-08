@@ -19,12 +19,9 @@ jobs:
           fetch-depth: 0
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        uses: SonarSource/sonarcloud-github-action@v3.0.0
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=erickjhairgonzalezgiron0-coder
-            -Dsonar.projectKey=erickjhairgonzalezgiron0-coder_miscelanea-pos-java
-            -Dsonar.sources=.
-            -Dsonar.java.binaries=.
+
+          
